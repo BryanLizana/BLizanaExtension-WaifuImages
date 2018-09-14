@@ -19,61 +19,90 @@ class BLizanaExtension {
     getJsContent() {
         return fs.readFileSync(vscodePath_1.default.jsPath, 'utf-8');
     }
-   
-    
+       
     install() {
 
-        let config = vscode.workspace.getConfiguration('blizana'); 
-               
-        let arr = []; 
-        let FolderImages = config.FolderImages;
-        if (FolderImages === undefined) {
-            vscode.window.showInformationMessage('Please add url of folder : "blizana.FolderImages": "C:/folders/packs/images_waifu/"!');
-        }else{
-            fs.readdirSync(FolderImages).forEach(file => {
-                arr.push(config.FolderImages + file);
-            });
-    
-            let codeJsToAdd = getJs.default(arr).replace(/\s*$/, ''); 
-    
-            let contentJS = this.getJsContent();
-            // contentJS = this.clearJsContent(contentJS);
-            codeJsToAdd += contentJS;
-            
-            let permitr = !~contentJS.indexOf(`/*background`);
-            if (permitr) {
-                fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
-            }
-    
-            let codeCssToAdd = getCss.default(arr).replace(/\s*$/, '');
-            let ContentCss = this.getCssContent();
-            ContentCss = this.clearCssContent(ContentCss);
-    
-            permitr = !~ContentCss.indexOf(`/*background`);
-            if (permitr) {
-                ContentCss += codeCssToAdd;
-                fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
-            }
-    
-            
-            vsHelp_1.default.showInfoRestart('Please restart!');
-        }
-        
+        if (fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {
+           
+            let config = vscode.workspace.getConfiguration('blizana'); 
+                
+            let arr = []; 
+            let FolderImages = config.FolderImages;
+            if (FolderImages === undefined) {
+                vscode.window.showInformationMessage('Please add url of folder : "blizana.FolderImages": "C:/folders/packs/images_waifu/"!');
+            }else{
+                fs.readdirSync(FolderImages).forEach(file => {
+                    // if ( file.indexOf(".jpg") || file.indexOf(".gif") || file.indexOf(".png") ) { //Only Images
+                        arr.push(config.FolderImages + file);                        
+                    // }
+                });
 
+                if (arr.length > 0) {
+                    let codeJsToAdd = getJs.default(arr).replace(/\s*$/, '');         
+                    let contentJS = this.getJsContent();
+                    // contentJS = this.clearJsContent(contentJS);
+                    codeJsToAdd += contentJS;
+                    
+                    let permitr = !~contentJS.indexOf(`/*background`);
+                    if (permitr) {
+                        fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
+                    }
+            
+                    let codeCssToAdd = getCss.default(arr).replace(/\s*$/, '');
+                    let ContentCss = this.getCssContent();
+                    ContentCss = this.clearCssContent(ContentCss);
+            
+                    permitr = !~ContentCss.indexOf(`/*background`);
+                    if (permitr) {
+                        ContentCss += codeCssToAdd;
+                        fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
+                    }        
+                    vsHelp_1.default.showInfoRestart('Please restart!');
+                }else{
+                    vscode.window.showInformationMessage('The folder is empty. No Waifus¡¡ :(');
+                }                
+            }
+        }else{
+            vscode.window.showInformationMessage('Not created files backup, try in admin mode, please');
+        }        
     }
     
     uninstall() {
         try {
-            let content = this.getCssContent();
-            // content = this.clearCssContent(content);
-            this.saveCssContent(content);
+            let contentJs = this.getJsContent();
+            let contentCss = this.getCssContent();
+
+            contentJs = this.clearJsContent(contentJs);
+            contentCss = this.clearCssContent(contentCss);
+
+            fs.writeFileSync(vscodePath_1.default.jsPath, contentJs, 'utf-8');
+            fs.writeFileSync(vscodePath_1.default.cssPath, contentCss, 'utf-8');
+
             return true;
         }
         catch (ex) {
             console.log(ex);
             return false;
         }
-    }    
+    }  
+    
+    backup(){
+        let contentJS = this.getJsContent();
+        let contentCss = this.getCssContent();
+        let permitr = !~contentJS.indexOf(`/*background`);
+
+        if (permitr) {
+            fs.appendFile(vscodePath_1.default.cssPath + ".backup", contentCss,'utf-8', function (err) {
+                if (err) throw err;
+                console.log('Backup CSS Ok¡');
+            });
+
+            fs.appendFile(vscodePath_1.default.jsPath + ".backup", contentJS,'utf-8', function (err) {
+                if (err) throw err;
+                console.log('Backup JS Ok¡');
+            });
+        }
+    }
 
     clearCssContent(content) {
         content = content.replace(/\/\*background-start\*\/[\s\S]*?\/\*background-end\*\//g, '');

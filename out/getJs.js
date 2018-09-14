@@ -12,9 +12,7 @@ function default_1(arr) {
     let content = `
     /*background-start*/
 
-    /*
-    document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className
-    */
+    /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/
     /* 
 
     var name_editor_one = Array( ${StringCss}  'Test-end' );

@@ -16,7 +16,8 @@ function activate(context) {
         vscode.window.showInformationMessage('Init BLizanaExtensión');
     });
    
-    context.subscriptions.push(main.default.install());
+    context.subscriptions.push(main.default.backup());
+    // context.subscriptions.push(main.default.install());
     context.subscriptions.push(disposable);
 }
 exports.activate = activate;
