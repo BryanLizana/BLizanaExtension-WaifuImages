@@ -23,9 +23,10 @@ class BLizanaExtension {
     install() {
 
         if (fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {
-           
-            let config = vscode.workspace.getConfiguration('blizana'); 
-                
+            
+            this.uninstall(); 
+
+            let config = vscode.workspace.getConfiguration('blizana');                 
             let arr = []; 
             let FolderImages = config.FolderImages;
             if (FolderImages === undefined) {
