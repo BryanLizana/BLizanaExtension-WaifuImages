@@ -33,8 +33,9 @@ class BLizanaExtension {
                 vscode.window.showInformationMessage('Please add url of folder : "blizana.FolderImages": "C:/folders/packs/images_waifu/"!');
             }else{
                 fs.readdirSync(FolderImages).forEach(file => {
-                    if ( file.indexOf(".jpg") || file.indexOf(".gif") || file.indexOf(".png") ) { //Only Images
-                        arr.push(config.FolderImages + file);                        
+                    if ( file.indexOf(".jpg") > 0 || file.indexOf(".gif")  > 0 || file.indexOf(".png")  > 0) { //Only Images
+                        arr.push(config.FolderImages + file);
+                        console.log(file);
                     }
                 });
 
