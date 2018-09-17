@@ -10,8 +10,8 @@ const vsHelp_1 = require("./vsHelp");
 class BLizanaExtension {
     constructor() {       
         
-    }       
-
+    }
+    
     getCssContent() {
         return fs.readFileSync(vscodePath_1.default.cssPath, 'utf-8');
     }
@@ -21,16 +21,13 @@ class BLizanaExtension {
     }
        
     install() {
-
-        if (fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {
-            
-            this.uninstall(); 
-
+        if (fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {            
+            this.uninstall(); //clear
             let config = vscode.workspace.getConfiguration('blizana');                 
             let arr = []; 
             let FolderImages = config.FolderImages;
             if (FolderImages === undefined) {
-                vscode.window.showInformationMessage('Please add url of folder : "blizana.FolderImages": "C:/folders/packs/images_waifu/"!');
+                vscode.window.showInformationMessage('Please add url of folder : "blizana.FolderImages": "C:/folders/packs/waifu_images_full/"!');
             }else{
                 fs.readdirSync(FolderImages).forEach(file => {
                     if ( file.indexOf(".jpg") > 0 || file.indexOf(".gif")  > 0 || file.indexOf(".png")  > 0) { //Only Images
@@ -42,27 +39,22 @@ class BLizanaExtension {
                 if (arr.length > 0) {
                     let codeJsToAdd = getJs.default(arr).replace(/\s*$/, '');         
                     let contentJS = this.getJsContent();
-                    // contentJS = this.clearJsContent(contentJS);
-                    codeJsToAdd += contentJS;
-                    
-                    let permitr = !~contentJS.indexOf(`/*background`);
-                    if (permitr) {
-                        fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
-                    }
-            
+
+                    codeJsToAdd += contentJS; 
+                    /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/       
+                    // FIXME: Remplazar el texto por otro
+                    fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
+
                     let codeCssToAdd = getCss.default(arr).replace(/\s*$/, '');
                     let ContentCss = this.getCssContent();
-                    ContentCss = this.clearCssContent(ContentCss);
             
-                    permitr = !~ContentCss.indexOf(`/*background`);
-                    if (permitr) {
-                        ContentCss += codeCssToAdd;
-                        fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
-                    }        
+                    ContentCss += codeCssToAdd;
+                    fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
+
                     vsHelp_1.default.showInfoRestart('Please restart!');
                 }else{
-                    vscode.window.showInformationMessage('The folder is empty. No Waifus¡¡ :(');
-                }                
+                    vscode.window.showInformationMessage('The folder is empty o not found. No Waifus¡¡ :(');
+                } 
             }
         }else{
             vscode.window.showInformationMessage('Not created files backup, try in admin mode, please');
@@ -74,16 +66,18 @@ class BLizanaExtension {
             let contentJs = this.getJsContent();
             let contentCss = this.getCssContent();
 
-            contentJs = this.clearJsContent(contentJs);
-            contentCss = this.clearCssContent(contentCss);
+            contentJs = this.clearContent(contentJs);
+            contentCss = this.clearContent(contentCss);
 
+            /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/       
+            // FIXME: Restablecer al texto original
             fs.writeFileSync(vscodePath_1.default.jsPath, contentJs, 'utf-8');
             fs.writeFileSync(vscodePath_1.default.cssPath, contentCss, 'utf-8');
 
             return true;
         }
         catch (ex) {
-            console.log(ex);
+            // console.log(ex);
             return false;
         }
     }  
@@ -96,28 +90,21 @@ class BLizanaExtension {
         if (permitr) {
             fs.appendFile(vscodePath_1.default.cssPath + ".backup", contentCss,'utf-8', function (err) {
                 if (err) throw err;
-                console.log('Backup CSS Ok¡');
+                // console.log('Backup CSS Ok¡');
             });
 
             fs.appendFile(vscodePath_1.default.jsPath + ".backup", contentJS,'utf-8', function (err) {
                 if (err) throw err;
-                console.log('Backup JS Ok¡');
+                // console.log('Backup JS Ok¡');
             });
         }
     }
 
-    clearCssContent(content) {
+    clearContent(content) {
         content = content.replace(/\/\*background-start\*\/[\s\S]*?\/\*background-end\*\//g, '');
         content = content.replace(/\s*$/, '');
         return content;
     }
-
-    clearJsContent(content) {
-        content = content.replace(/\/\*background-start\*\/[\s\S]*?\/\*background-end\*\//g, '');
-        content = content.replace(/\s*$/, '');
-        return content;
-    }   
     
 }
 exports.default = new BLizanaExtension();
-//# sourceMappingURL=background.js.map

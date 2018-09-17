@@ -15,7 +15,7 @@ Esta extensión está inspirada (y copiada en gran parte xd )  de : https://gith
 
 * Agregar en tu configuración
 ```
- "blizana.FolderImages": "C:/folders/packs/images_waifu/",
+ "blizana.FolderImages": "C:/folders/packs/waifu_images_full/",
 ```
 * Presionar F1 y buscar la opción
 ```
@@ -25,7 +25,8 @@ Esta extensión está inspirada (y copiada en gran parte xd )  de : https://gith
 * Reiniciar VSCode
  > Si hay problemas de permisos, iniciar VSCode como administrador
  
- > En caso falle la extensión...para eso te dije que hagas un backup, no? (Sorry si pasa eso :/ )
+ > En caso falle la extensión...para eso te dije que hagas un backup, no? (Sorry si pasa eso :/ ) la extensión crea unos archivos de respaldo workbench/workbench.main.js.backup y workbench/workbench.main.css.backup, sólo hay que buscarlos y reemplazar a los files dañados.
+
 
 
 ## Release Notes
