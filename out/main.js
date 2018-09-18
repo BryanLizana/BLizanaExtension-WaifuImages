@@ -22,8 +22,7 @@ class BLizanaExtension {
        
     install() {
 
-        // console.log(__dirname);
-        
+        // console.log(__dirname);        
         if ( fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {            
             this.uninstall(); //clear
             let config = vscode.workspace.getConfiguration('blizana');                 
@@ -40,6 +39,8 @@ class BLizanaExtension {
                 // FolderImages = FolderImages.replace(/\/[*]|\\/,"/"); 
                 
                 // console.log(FolderImages);
+
+                // Images free ;)
                 arr.push("https://lh4.googleusercontent.com/lICLpoJrZdBjIV1PRF1eltJoWCNX8fMO3Vj1YaaU5FR0dKBmMkjcbpY8gvSFIucEoW3NFfDwWXzh5RUXEprP=w924-h627");
                 arr.push("https://lh6.googleusercontent.com/84Qq3tWncE-bub-kvkIv8E5nMDNRjywcGED6hc3uBcWAAJrQOUOVrHyHucDugTWHfcI2rZ4H8oehWbM8QcSt=w924-h627");
                 arr.push("https://lh4.googleusercontent.com/JiLZHlQZG2OGZvU7uLvqC35vPDRClPrKsRrlu3rMHSK5Ewr_ux1eu2bCffHwQ3DC_oM8hyuv2i_kOuWZGR2C=w924-h627");                
@@ -81,7 +82,7 @@ class BLizanaExtension {
             }
         }else{
             vscode.window.showInformationMessage('Not created files backup, try in admin mode, please');
-        }        
+        }
     }
     
     uninstall() {
