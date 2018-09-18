@@ -21,21 +21,44 @@ class BLizanaExtension {
     }
        
     install() {
-        if (fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {            
+
+        // console.log(__dirname);
+        
+        if ( fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {            
             this.uninstall(); //clear
             let config = vscode.workspace.getConfiguration('blizana');                 
             let arr = []; 
             let FolderImages = config.FolderImages;
+
+            if (FolderImages == "default") {
+
+                // I not can replace "\" for "/" , why¡¡¡ :(
+                // FolderImages = __dirname + '/images/';
+                // // var path = require('path');
+                // // FolderImages = path.normalize(FolderImages); 
+                // FolderImages = FolderImages.replace(/\/|\\/,"/"); 
+                // FolderImages = FolderImages.replace(/\/[*]|\\/,"/"); 
+                
+                // console.log(FolderImages);
+                arr.push("https://lh4.googleusercontent.com/lICLpoJrZdBjIV1PRF1eltJoWCNX8fMO3Vj1YaaU5FR0dKBmMkjcbpY8gvSFIucEoW3NFfDwWXzh5RUXEprP=w924-h627");
+                arr.push("https://lh6.googleusercontent.com/84Qq3tWncE-bub-kvkIv8E5nMDNRjywcGED6hc3uBcWAAJrQOUOVrHyHucDugTWHfcI2rZ4H8oehWbM8QcSt=w924-h627");
+                arr.push("https://lh4.googleusercontent.com/JiLZHlQZG2OGZvU7uLvqC35vPDRClPrKsRrlu3rMHSK5Ewr_ux1eu2bCffHwQ3DC_oM8hyuv2i_kOuWZGR2C=w924-h627");                
+            }
+
+
             if (FolderImages === undefined) {
                 vscode.window.showInformationMessage('Please add url of folder : "blizana.FolderImages": "C:/folders/packs/waifu_images_full/"!');
             }else{
-                fs.readdirSync(FolderImages).forEach(file => {
-                    if ( file.indexOf(".jpg") > 0 || file.indexOf(".gif")  > 0 || file.indexOf(".png")  > 0) { //Only Images
-                        arr.push(config.FolderImages + file);
-                        console.log(file);
-                    }
-                });
 
+                if (fs.existsSync(FolderImages)) {
+                    fs.readdirSync(FolderImages).forEach(file => {
+                        if ( file.indexOf(".jpg") > 0 || file.indexOf(".gif")  > 0 || file.indexOf(".png")  > 0) { //Only Images
+                            arr.push(FolderImages + file);
+                            // console.log(file);
+                        }
+                    });
+                }
+              
                 if (arr.length > 0) {
                     let codeJsToAdd = getJs.default(arr).replace(/\s*$/, '');         
                     let contentJS = this.getJsContent();

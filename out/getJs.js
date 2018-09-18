@@ -15,7 +15,7 @@ function default_1(arr) {
     /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/    
 
     /*
-    var name_editor_one = Array( ${StringCss} editor-me-Lizana );
+    var name_editor_one = Array( ${StringCss} 'editor-x-Lizana' );
     */
     
     /*background-end*/
