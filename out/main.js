@@ -66,6 +66,8 @@ class BLizanaExtension {
                     codeJsToAdd += contentJS; 
                     /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/       
                     // FIXME: Remplazar el texto por otro
+
+                    // codeJsToAdd = codeJsToAdd.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
                     fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
 
                     let codeCssToAdd = getCss.default(arr).replace(/\s*$/, '');

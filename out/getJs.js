@@ -12,11 +12,17 @@ function default_1(arr) {
     let content = `
     /*background-start*/
 
-    /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/    
-
     /*
+    "monaco-scrollable-element "+
+
+    "monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +
+
+    document.createElement("div"),r._domNode.className="monaco-scrollable-element "+ r._options.className
+    */    
+
+  
     var name_editor_one = Array( ${StringCss} 'editor-x-Lizana' );
-    */
+    
     
     /*background-end*/
 
