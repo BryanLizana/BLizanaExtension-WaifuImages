@@ -2,7 +2,7 @@
 
 Extensión personal para agregar varias imágenes de fondo a partir de una carpeta.
 
-Esta extensión está inspirada (y copiada en gran parte xd )  de : https://github.com/shalldie/vscode-background
+Esta extensión está inspirada (y copiada en gran parte xd, ok no. )  de : https://github.com/shalldie/vscode-background
 
 ## Requirements
 
@@ -10,12 +10,15 @@ Esta extensión está inspirada (y copiada en gran parte xd )  de : https://gith
 * Hacer un Backup de Microsoft VS Code/resources/app/out/vs/workbench/workbench.main.js
 * Hacer un Backup de Microsoft VS Code/resources/app/out/vs/workbench/workbench.main.css
 
-
 ## Configuración
 
 * Agregar en tu configuración
 ```
  "blizana.FolderImages": "C:/folders/packs/waifu_images_full/",
+
+ or
+
+  "blizana.FolderImages": "default",
 ```
 * Presionar F1 y buscar la opción
 ```
@@ -26,8 +29,6 @@ Esta extensión está inspirada (y copiada en gran parte xd )  de : https://gith
  > Si hay problemas de permisos, iniciar VSCode como administrador
  
  > En caso falle la extensión...para eso te dije que hagas un backup, no? (Sorry si pasa eso :/ ) la extensión crea unos archivos de respaldo workbench/workbench.main.js.backup y workbench/workbench.main.css.backup, sólo hay que buscarlos y reemplazar a los files dañados.
-
-
 
 ## Release Notes
 
