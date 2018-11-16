@@ -83,7 +83,7 @@ class BLizanaExtension {
                     ContentCss += codeCssToAdd;
                     fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
 
-                    vsHelp_1.default.showInfoRestart('Please restart! ,url:'.vscodePath_1.default.jsPath);
+                    vsHelp_1.default.showInfoRestart('Please restart!');
                 }else{
                     vscode.window.showInformationMessage('The folder is empty o not found. No Waifus¡¡ :(');
                 } 

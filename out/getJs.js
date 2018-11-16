@@ -9,10 +9,7 @@ function default_1(arr) {
         StringCss +=` ' editor-${vardi}-Lizana', `;
     }
 
-    let content = `
-    /*background-start*/
-
-    /*
+      /*
     "monaco-scrollable-element "+
 
     "monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +
@@ -20,10 +17,10 @@ function default_1(arr) {
     document.createElement("div"),r._domNode.className="monaco-scrollable-element "+ r._options.className
     */    
 
-  
-    var name_editor_one = Array( ${StringCss} 'editor-x-Lizana' );
-    
-    
+
+    let content = `
+    /*background-start*/
+    var name_editor_one = Array( ${StringCss} 'editor-x-Lizana' );        
     /*background-end*/
 
     `;
