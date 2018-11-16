@@ -32,19 +32,25 @@ class BLizanaExtension {
             if (FolderImages == "default") {
 
                 // I not can replace "\" for "/" , why¡¡¡ :(
-                // FolderImages = __dirname + '/images/';
-                // // var path = require('path');
-                // // FolderImages = path.normalize(FolderImages); 
-                // FolderImages = FolderImages.replace(/\/|\\/,"/"); 
-                // FolderImages = FolderImages.replace(/\/[*]|\\/,"/"); 
-                
-                // console.log(FolderImages);
+                FolderImages = __dirname + '/images/';
 
-                // Images free ;)
-                arr.push("https://lh4.googleusercontent.com/lICLpoJrZdBjIV1PRF1eltJoWCNX8fMO3Vj1YaaU5FR0dKBmMkjcbpY8gvSFIucEoW3NFfDwWXzh5RUXEprP=w924-h627");
-                arr.push("https://lh6.googleusercontent.com/84Qq3tWncE-bub-kvkIv8E5nMDNRjywcGED6hc3uBcWAAJrQOUOVrHyHucDugTWHfcI2rZ4H8oehWbM8QcSt=w924-h627");
-                arr.push("https://lh4.googleusercontent.com/JiLZHlQZG2OGZvU7uLvqC35vPDRClPrKsRrlu3rMHSK5Ewr_ux1eu2bCffHwQ3DC_oM8hyuv2i_kOuWZGR2C=w924-h627");                
-            }
+                FolderImages = escape(FolderImages)
+                
+                FolderImages = FolderImages.replace("%3A%5C",":/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                FolderImages = FolderImages.replace("%5C","/"); 
+                // FolderImages = FolderImages.replace("\\","/"); 
+                // C%3A%5CUsers%5CBLizana%5C.vscode%5Cextensions%5Cbl-extension%5Cout%5Cimages%5C
+
+                console.log(FolderImages);
+
+          }
 
 
             if (FolderImages === undefined) {
@@ -63,12 +69,12 @@ class BLizanaExtension {
                 if (arr.length > 0) {
                     let codeJsToAdd = getJs.default(arr).replace(/\s*$/, '');         
                     let contentJS = this.getJsContent();
-
+                    contentJS = contentJS.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
+                    contentJS = contentJS.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
+                    contentJS = contentJS.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
                     codeJsToAdd += contentJS; 
-                    /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/       
-                    // FIXME: Remplazar el texto por otro
+                    /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/                           
 
-                    // codeJsToAdd = codeJsToAdd.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
                     fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
 
                     let codeCssToAdd = getCss.default(arr).replace(/\s*$/, '');
@@ -77,7 +83,7 @@ class BLizanaExtension {
                     ContentCss += codeCssToAdd;
                     fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
 
-                    vsHelp_1.default.showInfoRestart('Please restart!');
+                    vsHelp_1.default.showInfoRestart('Please restart! ,url:'.vscodePath_1.default.jsPath);
                 }else{
                     vscode.window.showInformationMessage('The folder is empty o not found. No Waifus¡¡ :(');
                 } 
