@@ -95,14 +95,10 @@ class BLizanaExtension {
     
     uninstall() {
         try {
-            let contentJs = this.getJsContent();
-            let contentCss = this.getCssContent();
+            // MV file BK
+            let contentJs = fs.readFileSync(vscodePath_1.default.jsPathBK, 'utf-8');
+            let contentCss = fs.readFileSync(vscodePath_1.default.cssPathBK, 'utf-8');
 
-            contentJs = this.clearContent(contentJs);
-            contentCss = this.clearContent(contentCss);
-
-            /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/       
-            // FIXME: Restablecer al texto original
             fs.writeFileSync(vscodePath_1.default.jsPath, contentJs, 'utf-8');
             fs.writeFileSync(vscodePath_1.default.cssPath, contentCss, 'utf-8');
 
@@ -132,11 +128,11 @@ class BLizanaExtension {
         }
     }
 
-    clearContent(content) {
-        content = content.replace(/\/\*background-start\*\/[\s\S]*?\/\*background-end\*\//g, '');
-        content = content.replace(/\s*$/, '');
-        return content;
-    }
+    // clearContent(content) {
+    //     content = content.replace(/\/\*background-start\*\/[\s\S]*?\/\*background-end\*\//g, '');
+    //     content = content.replace(/\s*$/, '');
+    //     return content;
+    // }
     
 }
 exports.default = new BLizanaExtension();

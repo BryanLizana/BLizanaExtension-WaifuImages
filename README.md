@@ -11,6 +11,7 @@ Esta extensión está inspirada (y copiada en gran parte xd, ok no. )  de : http
 * Hacer un Backup de Microsoft VS Code/resources/app/out/vs/workbench/workbench.main.css
 
 ## Configuración
+*Abrir VSCode en modo amdin
 
 * Agregar en tu configuración
 ```
