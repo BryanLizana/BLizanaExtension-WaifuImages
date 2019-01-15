@@ -2,7 +2,8 @@
 	"name": "extension-test-lizana",
 	"publisher": "extension-test-lizana",
 	"displayName": "extension-test-lizana",
-	"description": "Add background image to VSCode",	
+	"description": "Add background image to VSCode",
+	"repository" : "git@github.com:BryanLizana/BLizanaExtension-WaifuImages.git",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.30.0"
