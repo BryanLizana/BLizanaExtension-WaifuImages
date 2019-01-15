@@ -1,36 +1,36 @@
 {
-    "name": "bl-extension",
-    "displayName": "BL-extension",
-    "description": "Agregar a tu waifu de fondo para que esté siempre contigo :v",
-    "version": "0.0.1",
-    "publisher": "BLizanaExtensionMyWaifu",
-    "engines": {
-        "vscode": "^1.27.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "onCommand:extension.myWaifu"
-    ],
-    "main": "out/extension",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.myWaifu",
-                "title": "My Waifu is real¡¡"
-            }
-        ]
-    },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.21",
-        "eslint": "^4.11.0",
-        "@types/node": "^8.10.25",
-        "@types/mocha": "^2.2.42"
-    }
+	"name": "extension-test-lizana",
+	"publisher": "extension-test-lizana",
+	"displayName": "extension-test-lizana",
+	"description": "Add background image to VSCode",	
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.30.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.myWaifu"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.myWaifu",
+				"title": "My Waifu is real¡¡"
+			}
+		]
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.1.4",
+		"vscode": "^1.1.25",
+		"eslint": "^4.11.0",
+		"@types/node": "^8.10.25",
+		"@types/mocha": "^2.2.42"
+	}
 }
