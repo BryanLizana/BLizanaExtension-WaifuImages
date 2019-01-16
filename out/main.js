@@ -105,11 +105,16 @@ class BLizanaExtension {
 
                     let codeJsToAdd = '';
                     try {
-                        codeJsToAdd = getJs.default(arr).replace(/\s*$/, ''); //código que irá en la parte superior, las variables a usar          
                         let contentJS = this.getJsContent();
-                        contentJS = contentJS.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
-                        codeJsToAdd += contentJS; 
-                        /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/                           
+                        if (contentJS.search('"monaco-scrollable-element "+') != -1) {
+                            codeJsToAdd = getJs.default(arr).replace(/\s*$/, ''); //código que irá en la parte superior, las variables a usar          
+                            contentJS = contentJS.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
+                            codeJsToAdd += contentJS; 
+                            fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
+                            /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/                       
+                        }else{
+                            vscode.window.showInformationMessage(':( no se puede agregar a las waifus¡¡¡') 
+                        }
     
                     } catch (error) {
                         vscode.window.showInformationMessage('Error to get text') 
@@ -118,7 +123,6 @@ class BLizanaExtension {
                   
                     try {
                         if(codeJsToAdd != ''){
-                            fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
 
                             let codeCssToAdd = getCss.default(arr).replace(/\s*$/, '');
                             let ContentCss = this.getCssContent();
