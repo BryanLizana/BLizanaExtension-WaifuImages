@@ -18,7 +18,7 @@ function activate(context) {
 exports.activate = activate;
 // this method is called when your extension is deactivated
 function deactivate() {
-    main.default.uninstall()
+    // main.default.uninstall()
 }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map
