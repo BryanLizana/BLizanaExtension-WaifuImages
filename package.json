@@ -16,12 +16,14 @@
     "main": "./out/extension.js",
     "contributes": {
         "configuration": {
-        "properties": {
-            "MyWaifuList.packWaifu": {
-                "description": "Folder donde están tus waifus xd (C:/folders/packs/waifu_images_full/) ",
-                "type": "string",
-                "default": "default"
-            }
+            "type": "object",
+            "title": "Waifu List Configurations",
+            "properties": {               
+                "MyWaifuList.packWaifu": {
+                    "description": "Folder donde están tus waifus xd (C:/folders/packs/waifu_images_full/) ",
+                    "type": "string",
+                    "default": "default"
+                }
             }
         },
         "commands": [
