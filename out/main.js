@@ -7,27 +7,26 @@ const getCss = require("./getCss");
 const getJs = require("./getJS");
 const vsHelp_1 = require("./vsHelp");
 
-
 class BLizanaExtension {
 
     backup(){
         let contentJS = this.getJsContent();
         let contentCss = this.getCssContent();
-        let permitr = !~contentJS.indexOf(`/*background`);
+        let permitr = !~contentJS.indexOf(`/*MyWaifuList`);
 
         if (permitr) {
             fs.appendFile(vscodePath_1.default.cssPath + ".backup", contentCss,'utf-8', function (err) {
                 if (err) throw err;
-                // console.log('Backup CSS Ok¡');
+                vscode.window.showInformationMessage('Backup CSS Ok¡') 
             });
 
             fs.appendFile(vscodePath_1.default.jsPath + ".backup", contentJS,'utf-8', function (err) {
                 if (err) throw err;
-                // console.log('Backup JS Ok¡');
+                vscode.window.showInformationMessage('Backup JS Ok¡') 
             });
         }
     }
-
+    
     getCssContent() {
         return fs.readFileSync(vscodePath_1.default.cssPath, 'utf-8');
     }
@@ -35,10 +34,10 @@ class BLizanaExtension {
     getJsContent() {
         return fs.readFileSync(vscodePath_1.default.jsPath, 'utf-8');
     }
-
+       
     uninstall() {
         try {
-            // MV file BK
+             // MV file BK
             let contentJs = fs.readFileSync(vscodePath_1.default.jsPathBK, 'utf-8');
             let contentCss = fs.readFileSync(vscodePath_1.default.cssPathBK, 'utf-8');
 
@@ -51,21 +50,18 @@ class BLizanaExtension {
             // console.log(ex);
             return false;
         }
-    }  
-
+    }
 
     install() {
 
-        // console.log(__dirname);        
         if ( fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {            
             this.uninstall(); //clear
-            let config = vscode.workspace.getConfiguration('blizana');                 
+            let config = vscode.workspace.getConfiguration('MyWaifuList');                 
             let arr = []; 
-            let FolderImages = config.FolderImages;
+            let FolderImages = config.packWaifu;
 
-            if (FolderImages == "default") {
-
-                // I not can replace "\" for "/" , why¡¡¡ :(
+            if (FolderImages == "default" || FolderImages === undefined) {
+                 // I not can replace "\" for "/" , why¡¡¡ :(
                 FolderImages = __dirname + '/images/';
 
                 FolderImages = escape(FolderImages)
@@ -81,14 +77,8 @@ class BLizanaExtension {
                 FolderImages = FolderImages.replace("%5C","/"); 
                 // FolderImages = FolderImages.replace("\\","/"); 
                 // C%3A%5CUsers%5CBLizana%5C.vscode%5Cextensions%5Cbl-extension%5Cout%5Cimages%5C
-                console.log(FolderImages);
-
-          }
-
-
-            if (FolderImages === undefined) {
-                vscode.window.showInformationMessage('Please add url of folder : "blizana.FolderImages": "C:/folders/packs/waifu_images_full/" ¡¡');
-            }else{
+                console.log(FolderImages);                
+            }
 
                 if (fs.existsSync(FolderImages)) {
                     fs.readdirSync(FolderImages).forEach(file => {
@@ -101,8 +91,7 @@ class BLizanaExtension {
               
                 if (arr.length > 0) {
 
-                    vscode.window.showInformationMessage('Run¡');  
-
+                    // vscode.window.showInformationMessage('Run¡');  
                     let codeJsToAdd = '';
                     try {
                         let contentJS = this.getJsContent();
@@ -137,17 +126,14 @@ class BLizanaExtension {
                        vscode.window.showInformationMessage('No write, please try on mode admin'); 
                        console.log(error);                       
                     }
-               
-                }else{
+                      }else{
                     vscode.window.showInformationMessage('The folder is empty o not found. No Waifus¡¡ :(');
                 } 
-            }
         }else{
             vscode.window.showInformationMessage('Not created files backup, try in admin mode, please');
         }
     }
-
+    
 
 }
-
 exports.default = new BLizanaExtension();

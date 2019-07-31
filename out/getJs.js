@@ -19,9 +19,9 @@ function default_1(arr) {
 
 
     let content = `
-    /*background-start*/
+    /*MyWaifuList-start*/
     var name_editor_one = Array( ${StringCss} 'editor-x-Lizana' );        
-    /*background-end*/
+    /*MyWaifuList-end*/
 
     `;
     return content;

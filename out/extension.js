@@ -7,18 +7,21 @@ const main = require("./main");
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 function activate(context) {
-    let disposable = vscode.commands.registerCommand('extension.myWaifu', () => {
-        vscode.window.showInformationMessage('Init BLizanaExtensión');
-    });
-   
-    context.subscriptions.push(main.default.backup());    
-    context.subscriptions.push(main.default.install());
-    context.subscriptions.push(disposable);
+
+    let command_init = 'MyWaifuList.init';
+
+    let commandHandler = () => {
+        main.default.backup();
+        main.default.install();
+    }
+
+    context.subscriptions.push(vscode.commands.registerCommand(command_init, commandHandler));
+
 }
 exports.activate = activate;
 // this method is called when your extension is deactivated
 function deactivate() {
-    // main.default.uninstall()
+
 }
 exports.deactivate = deactivate;
 //# sourceMappingURL=extension.js.map
