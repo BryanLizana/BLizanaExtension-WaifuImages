@@ -21,6 +21,7 @@ function activate(context) {
 exports.activate = activate;
 // this method is called when your extension is deactivated
 function deactivate() {
+    main.default.uninstall();
 
 }
 exports.deactivate = deactivate;
