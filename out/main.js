@@ -12,18 +12,16 @@ class BLizanaExtension {
     backup(){
         let contentJS = this.getJsContent();
         let contentCss = this.getCssContent();
-        let permitr = !~contentJS.indexOf(`/*MyWaifuList`);
+        let permitr = (!~contentJS.indexOf(`/*MyWaifuList`));
 
         if (permitr) {
-            fs.appendFile(vscodePath_1.default.cssPath + ".backup", contentCss,'utf-8', function (err) {
-                if (err) throw err;
-                vscode.window.showInformationMessage('Backup CSS Ok¡') 
-            });
 
-            fs.appendFile(vscodePath_1.default.jsPath + ".backup", contentJS,'utf-8', function (err) {
-                if (err) throw err;
-                vscode.window.showInformationMessage('Backup JS Ok¡') 
-            });
+            // Empty File, antes
+            fs.writeFileSync(vscodePath_1.default.cssPath + ".backup", contentCss, 'utf-8');
+            fs.writeFileSync(vscodePath_1.default.jsPath + ".backup", contentJS, 'utf-8');
+
+            vscode.window.showInformationMessage('Backup Ok¡') 
+
         }
     }
     
@@ -44,7 +42,7 @@ class BLizanaExtension {
             fs.writeFileSync(vscodePath_1.default.jsPath, contentJs, 'utf-8');
             fs.writeFileSync(vscodePath_1.default.cssPath, contentCss, 'utf-8');
 
-            return true;
+             return true;
         }
         catch (ex) {
             // console.log(ex);
@@ -54,14 +52,14 @@ class BLizanaExtension {
 
     install() {
 
-        if ( fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {            
+        if ( fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {
             this.uninstall(); //clear
             let config = vscode.workspace.getConfiguration('MyWaifuList');                 
             let arr = []; 
             let FolderImages = config.packWaifu;
 
             if (FolderImages == "default" || FolderImages === undefined) {
-                 // I not can replace "\" for "/" , why¡¡¡ :(
+                 // I not can replace "\" for "/" , why¡¡¡ :/
                 FolderImages = __dirname + '/images/';
 
                 FolderImages = escape(FolderImages)
@@ -118,7 +116,6 @@ class BLizanaExtension {
                     
                             ContentCss += codeCssToAdd;
                             fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
-        
                             vsHelp_1.default.showInfoRestart('Please restart!');
                         }
                         
@@ -129,6 +126,9 @@ class BLizanaExtension {
                       }else{
                     vscode.window.showInformationMessage('The folder is empty o not found. No Waifus¡¡ :(');
                 } 
+
+        // });  // end promise
+
         }else{
             vscode.window.showInformationMessage('Not created files backup, try in admin mode, please');
         }

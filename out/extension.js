@@ -9,13 +9,19 @@ const main = require("./main");
 function activate(context) {
 
     let command_init = 'MyWaifuList.init';
+    // let command_desactive = 'MyWaifuList.uninstall';
 
     let commandHandler = () => {
         main.default.backup();
         main.default.install();
     }
 
+    // let commandHandler_uninstall = () => {
+    //     main.default.uninstall();
+    // }
     context.subscriptions.push(vscode.commands.registerCommand(command_init, commandHandler));
+
+    // context.subscriptions.push(vscode.commands.registerCommand(command_desactive, commandHandler_uninstall));
 
 }
 exports.activate = activate;
