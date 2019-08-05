@@ -11,7 +11,8 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:MyWaifuList.init"
+        "onCommand:MyWaifuList.init",
+        "onCommand:MyWaifuList.bye"
     ],
     "main": "./out/extension.js",
     "contributes": {
@@ -30,6 +31,9 @@
             {
                 "command": "MyWaifuList.init",
                 "title": "I wish my waifu was real"
+            },{
+                "command": "MyWaifuList.bye",
+                "title": "Bye bye Waifu :c"
             }
         ]
     },
