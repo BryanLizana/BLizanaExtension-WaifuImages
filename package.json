@@ -24,6 +24,11 @@
                     "description": "Folder donde están tus waifus xd (C:/folders/packs/waifu_images_full/) ",
                     "type": "string",
                     "default": "default"
+                },
+                "MyWaifuList.waifuTransparencia": {
+                    "description": "Nivel de transparencia de las Waifus xd",
+                    "type": "integer",
+                    "default": "9"
                 }
             }
         },

@@ -10,8 +10,16 @@ function default_1(arr) {
         StringCss += ` .editor-${vardi}-Lizana:nth-child(2)::after{background-image: url('${textImg}');content:'';pointer-events:none;position:absolute;z-index:99999;width:100%;height:100%;background-position:100% 100%;background-repeat:no-repeat;opacity:1;;}`;
     }
 
+    let date_ob = new Date();
+    // current hours
+    let hours = date_ob.getHours();
+
+    // current minutes
+    let minutes = date_ob.getMinutes();
+
     let content = `
     /*MyWaifuList-start*/
+      /*${hours + ":" + minutes}*/
       ${StringCss} 
     /*MyWaifuList-end*/
     `;

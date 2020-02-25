@@ -52,11 +52,13 @@ class BLizanaExtension {
 
     install() {
 
+        console.log(vscodePath_1.default.cssPath);
         if ( fs.existsSync(vscodePath_1.default.cssPath + ".backup") && fs.existsSync(vscodePath_1.default.jsPath + ".backup") ) {
             this.uninstall(); //clear
             let config = vscode.workspace.getConfiguration('MyWaifuList');                 
             let arr = []; 
             let FolderImages = config.packWaifu;
+            let transparencia_number = config.waifuTransparencia;
 
             if (FolderImages == "default" || FolderImages === undefined) {
                  // I not can replace "\" for "/" , why¡¡¡ :/
@@ -95,7 +97,7 @@ class BLizanaExtension {
                         let contentJS = this.getJsContent();
                         if (contentJS.search('"monaco-scrollable-element "+') != -1) {
                             codeJsToAdd = getJs.default(arr).replace(/\s*$/, ''); //código que irá en la parte superior, las variables a usar          
-                            contentJS = contentJS.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');
+                            contentJS = contentJS.replace('"monaco-scrollable-element "+','"monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " +');                            
                             codeJsToAdd += contentJS; 
                             fs.writeFileSync(vscodePath_1.default.jsPath, codeJsToAdd, 'utf-8');
                             /*document.createElement("div"),r._domNode.className="monaco-scrollable-element " + name_editor_one[Math.floor(Math.random()*name_editor_one.length)] +" " + r._options.className*/                       
@@ -110,11 +112,30 @@ class BLizanaExtension {
                   
                     try {
                         if(codeJsToAdd != ''){
-
+                            // regresar a la base del css
+                            let ContentCss = fs.readFileSync(vscodePath_1.default.cssPathBK, 'utf-8');
                             let codeCssToAdd = getCss.default(arr).replace(/\s*$/, '');
-                            let ContentCss = this.getCssContent();
-                    
+                            // let ContentCss = this.getCssContent();                    
+
+                            if (transparencia_number != undefined) {
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+                                codeCssToAdd = codeCssToAdd.replace('background-repeat:no-repeat;opacity:1;;','background-repeat:no-repeat;opacity:0.'+transparencia_number+';;');                                
+
+                            }
+
                             ContentCss += codeCssToAdd;
+
+
+
                             fs.writeFileSync(vscodePath_1.default.cssPath, ContentCss, 'utf-8');
                             vsHelp_1.default.showInfoRestart('Please restart!');
                         }
@@ -123,7 +144,7 @@ class BLizanaExtension {
                        vscode.window.showInformationMessage('No write, please try on mode admin'); 
                        console.log(error);                       
                     }
-                      }else{
+                }else{
                     vscode.window.showInformationMessage('The folder is empty o not found. No Waifus¡¡ :(');
                 } 
 
