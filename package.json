@@ -1,57 +1,81 @@
 {
-    "name": "my-waifu-list",
-    "displayName": "My Waifu List :v",
-    "description": "Agregar a tu waifu de fondo para que esté siempre contigo :''v",
-    "version": "0.0.2",
-    "publisher": "BLizanaExtensionMyWaifuList",
-    "engines": {
-        "vscode": "^1.30.0"
-    },
-    "categories": [
-        "Other"
+  "name": "waifu-tab-images",
+  "displayName": "Waifu Tab Images",
+  "description": "Muestra una imagen decorativa aleatoria (waifu) en la esquina inferior derecha de cada tab del editor de VS Code",
+  "version": "0.1.0",
+  "publisher": "blizana",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Themes",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionKind": [
+    "ui"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "waifuTabImages.instalar",
+        "title": "Waifu Tab Images: Instalar / Install"
+      },
+      {
+        "command": "waifuTabImages.desinstalar",
+        "title": "Waifu Tab Images: Desinstalar / Uninstall"
+      },
+      {
+        "command": "waifuTabImages.recargar",
+        "title": "Waifu Tab Images: Recargar Imagenes / Reload Images"
+      }
     ],
-    "activationEvents": [
-        "onCommand:MyWaifuList.init",
-        "onCommand:MyWaifuList.bye"
-    ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "configuration": {
-            "type": "object",
-            "title": "Waifu List Configurations",
-            "properties": {
-                "MyWaifuList.packWaifu": {
-                    "description": "Folder donde están tus waifus xd (C:/folders/packs/waifu_images_full/) ",
-                    "type": "string",
-                    "default": "default"
-                },
-                "MyWaifuList.waifuTransparencia": {
-                    "description": "Nivel de transparencia de las Waifus xd",
-                    "type": "integer",
-                    "default": "9"
-                }
-            }
+    "configuration": {
+      "title": "Waifu Tab Images",
+      "properties": {
+        "waifuTabImages.habilitado": {
+          "type": "boolean",
+          "default": true,
+          "description": "Habilitar/deshabilitar imagenes waifu en los tabs del editor"
         },
-        "commands": [
-            {
-                "command": "MyWaifuList.init",
-                "title": "I wish my waifu was real"
-            },
-            {
-                "command": "MyWaifuList.bye",
-                "title": "Bye bye Waifu :c"
-            }
-        ]
-    },
-    "scripts": {
-        "postinstall": "node ./node_modules/vscode/bin/install",
-        "test": "node ./node_modules/vscode/bin/test"
-    },
-    "devDependencies": {
-        "@types/mocha": "^2.2.42",
-        "@types/node": "^8.10.59",
-        "eslint": "^4.11.0",
-        "typescript": "^3.8.2",
-        "vscode": "^1.1.36"
+        "waifuTabImages.opacidad": {
+          "type": "number",
+          "default": 0.4,
+          "minimum": 0.05,
+          "maximum": 0.8,
+          "description": "Opacidad de la imagen (0.05 a 0.8)"
+        },
+        "waifuTabImages.tamano": {
+          "type": "number",
+          "default": 300,
+          "minimum": 50,
+          "maximum": 800,
+          "description": "Tamano de la imagen en pixeles (ancho y alto)"
+        },
+        "waifuTabImages.rutaCarpetaImagenes": {
+          "type": "string",
+          "default": "",
+          "description": "Ruta personalizada a una carpeta de imagenes. Dejar vacio para usar las imagenes incluidas por defecto."
+        }
+      }
     }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "@vscode/sudo-prompt": "^9.3.1"
+  }
 }
