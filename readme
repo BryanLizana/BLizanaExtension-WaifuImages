@@ -1,3 +1,4 @@
 npm install
 npm run compile
-install via vsix
+install via vsix -    vsce package
+
